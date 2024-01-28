@@ -1,0 +1,41 @@
+<% layout("layouts/boilerplate") %>
+
+<body>
+    <h1>here you can edit your listing</h1>
+    <div class="row mt-3">
+        <div class="col-8 offset-2">
+            <form method="post" action="/listings/<%=listing._id%>?_method=PUT" novalidate class="needs-validation">
+                <div>
+                    <label for="title" class="form-label">Enter title</label>
+                    <input type="text" name="listing[title]" id="title" class="form-control" value="<%=listing.title %>" required>
+                    <div class="valid-feedback">Looks good</div>
+                </div>
+                <div>
+                    <label for="desc" class="form-label">enter description</label>
+                    <textarea name="listing[desc]" id="desc" cols="30" rows="10" class="form-control" required><%=listing.desc %></textarea>
+                    <div class="invalid-feedback">Desc likho</div>
+                </div>
+                <div class="row">
+                    <!-- applies only on the defined size, below this occupy 12 cols total -->
+                    <div class="col-md-4 mb-3">
+                        <label for="price" class="form-label">enter price</label>
+                        <input type="number" name="listing[price]" id="price"  class="form-control" value="<%=listing.price %>"required>
+                        <div class="invalid-feedback">Price required</div>
+                    </div>
+                    <div class="col-md-8 mb-3">
+                        <label for="location" class="form-label">enter location</label>
+                        <input type="text" name="listing[location]" id="location" class="form-control" value="<%=listing.location%>" required>
+                        <div class="invalid-feedback">Location likh be</div>
+                    </div>
+                </div>
+                <div>
+                    <label for="country" class="form-label">enter country</label>
+                    <input type="text" name="listing[country]" id="country" class="form-control" value="<%=listing.country%>" required>
+                    <div class="invalid-feedback">Desc required</div>
+                    <div class="invalid-feedback">Jiyada socho nhi India likho</div>
+                </div>
+                <button class="btn btn-dark edit_btn mt-3">submit</button>
+            </form>
+        </div>
+    </div>
+</body>

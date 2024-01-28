@@ -1,0 +1,50 @@
+<% layout("layouts/boilerplate")%> 
+<!-- views folder me direct dhundega -->
+
+    <body>
+        <h1>here you can add your new listing</h1>
+        <!-- grid ka har er row ke liye custom column design -->
+        <div class="row"> 
+            <div class="col-8 offset-2">
+                <form method="post" action="/listings" novalidate class="needs-validation">
+                    <div class="mb-3">
+                        <label for="title" class="form-label">Enter title</label>
+                        <input type="text" name="listing[title]" id="title" placeholder="enter title"
+                            class="form-control" required>
+                            <div class="valid-feedback">Looks good</div>
+                    </div>
+                    <div class="mb-3">
+                        <label for="desc" class="form-label">enter description</label>
+                        <textarea name="listing[desc]" id="desc" cols="30" rows="10" placeholder="enter desc"
+                            class="form-control" required></textarea>
+                        <div class="invalid-feedback">Desc required</div>
+
+                    </div>
+                    <div class="row">
+                        <!-- applies only on the defined size, below this occupy 12 cols total -->
+                        <div class="col-md-4 mb-3">
+                            <label for="price" class="form-label">enter price</label>
+                            <input type="text" name="listing[price]" id="price" placeholder="enter price"
+                                class="form-control" required>
+                            <div class="invalid-feedback">Price required</div>
+                            
+                        </div>
+                        <div class="col-md-8 mb-3">
+                            <label for="location" class="form-label">enter location</label>
+                            <input type="text" name="listing[location]" id="location" placeholder="enter location"
+                                class="form-control" required>
+                            <div class="invalid-feedback">Location required</div>
+
+                        </div>
+                    </div>
+                    <div class="mb-3">
+                        <label for="country" class="form-label">enter country</label>
+                        <input type="text" name="listing[country]" id="country" placeholder="enter country"
+                            class="form-control" required>
+                        <div class="invalid-feedback">country to likho</div>
+                    </div>
+                    <button class="btn btn-dark form_btn mb-3">submit</button>
+                </form>
+            </div>
+        </div>
+    </body>
