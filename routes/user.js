@@ -9,18 +9,34 @@ const {saveRedirectUrl}=require("../middleware.js");
 const userController= require("../controller/user.js");
 
 
-//SIGN UP ROUTES
-userRoute.get("/signup",userController.signupForm);
+//SIGN UP ROUTES 
+userRoute.route("/signup")
+.get(userController.signupForm)
+.post(wrapAsync(userController.saveSignupDetails));
 
-userRoute.post("/signup",wrapAsync(userController.saveSignupDetails));
 
 //LOGIN ROUTES
-userRoute.get("/login",userController.serveLoginForm);
+userRoute.route("/login")
+.get(userController.serveLoginForm)
+.post(saveRedirectUrl,passport.authenticate("local",{failureRedirect:"/login",failureFlash:true}),userController.checkLogin);
 
-userRoute.post("/login",saveRedirectUrl,passport.authenticate("local",{failureRedirect:"/login",failureFlash:true}),userController.checkLogin);
 
 //LOGOUT ROUTE
 userRoute.get("/logout",userController.logout);
+
+
+// //SIGN UP ROUTES
+// userRoute.get("/signup",userController.signupForm);
+
+// userRoute.post("/signup",wrapAsync(userController.saveSignupDetails));
+
+// //LOGIN ROUTES
+// userRoute.get("/login",userController.serveLoginForm);
+
+// userRoute.post("/login",saveRedirectUrl,passport.authenticate("local",{failureRedirect:"/login",failureFlash:true}),userController.checkLogin);
+
+// //LOGOUT ROUTE
+// userRoute.get("/logout",userController.logout);
 
 
 

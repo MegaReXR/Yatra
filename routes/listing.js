@@ -28,26 +28,52 @@ const listingController=require("../controller/listing.js");
 //     }
 // }
 
+
 //ROUTES
-//index route
-listingsRoute.get("/",wrapAsync(listingController.showIndex));
+//index route and create -> add to DB
+listingsRoute.route("/")
+.get(wrapAsync(listingController.showIndex))
+.post(isLoggedIn ,validateListing, wrapAsync(listingController.saveNewListing));
+
 
 //create route
 //new 
 listingsRoute.get("/new",isLoggedIn,listingController.serveNewForm);
-//add to DB
-listingsRoute.post("/",isLoggedIn ,validateListing, wrapAsync(listingController.saveNewListing));
 
-//show route
-listingsRoute.get("/:id",wrapAsync(listingController.showListing));
+
+//show route, update route and delete route
+listingsRoute.route("/:id")
+.get(wrapAsync(listingController.showListing))
+.put(isLoggedIn,isOwner,validateListing, wrapAsync(listingController.saveEditListing))
+.delete(isLoggedIn,isOwner,wrapAsync(listingController.destroyListing));
 
 //edit route
 listingsRoute.get("/:id/edit",isLoggedIn,isOwner,wrapAsync(listingController.serveEditForm));
-//update
-listingsRoute.put("/:id",isLoggedIn,isOwner,validateListing, wrapAsync(listingController.saveEditListing));
 
-//delete route
-listingsRoute.delete("/:id",isLoggedIn,isOwner,wrapAsync(listingController.destroyListing));
+
+
+
+
+// //ROUTES
+// //index route
+// listingsRoute.get("/",wrapAsync(listingController.showIndex));
+
+// //create route
+// //new 
+// listingsRoute.get("/new",isLoggedIn,listingController.serveNewForm);
+// //add to DB
+// listingsRoute.post("/",isLoggedIn ,validateListing, wrapAsync(listingController.saveNewListing));
+
+// //show route
+// listingsRoute.get("/:id",wrapAsync(listingController.showListing));
+
+// //edit route
+// listingsRoute.get("/:id/edit",isLoggedIn,isOwner,wrapAsync(listingController.serveEditForm));
+// //update
+// listingsRoute.put("/:id",isLoggedIn,isOwner,validateListing, wrapAsync(listingController.saveEditListing));
+
+// //delete route
+// listingsRoute.delete("/:id",isLoggedIn,isOwner,wrapAsync(listingController.destroyListing));
 
 
 
