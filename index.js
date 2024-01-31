@@ -1,3 +1,9 @@
+//USING DOTENV FOR ACCESSING OUR CLOUD CREDENTIALS
+if(process.env.NODE_ENV!="production"){
+    require("dotenv").config();
+    // console.log(process.env.CLOUD_NAME);
+}
+
 //requiring all the meeded modules
 const express=require("express");
 const app= express();

@@ -4,7 +4,7 @@ const validSchema= joi.object({
     listing: joi.object({
         title: joi.string().required(),
         desc: joi.string().required(),
-        image: joi.string().allow("",null),
+        // image: joi.string().allow("",null),
         price: joi.number().required().min(0),
         location: joi.string().required(),
         country: joi.string().required(),

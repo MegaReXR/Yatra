@@ -54,6 +54,11 @@ module.exports.saveNewListing= async(req,res,next)=>{ //using wrap async for han
     //save owner of the created listing
     newListing.owner=req.user._id; //uses passport
 
+    //NEW IMAGE LINK SAVE IN MONGO
+    let url=req.file.path; //req.file se image ka detaile nikalo
+    let filename=req.file.filename;
+    newListing.image={url,filename}; //save se phle inage field me woh fill krdo
+
     await newListing.save() //isme error aane pe catch block me direct catch hoga
     // .then((res)=>{
     //     console.log("data added");
@@ -101,7 +106,15 @@ module.exports.saveEditListing= async(req,res)=>{
     //getting data obj of form from req body
     const listing=req.body.listing;
     console.log(listing);
-    await Listing.findByIdAndUpdate(id,{...listing});
+    const updatedListing=await Listing.findByIdAndUpdate(id,{...listing});
+    //setting image url on updation if new file is uploaded
+    if(req.file){
+        let url= req.file.path;
+        let filename= req.file.filename;
+        updatedListing.image={url,filename};
+        updatedListing.save();
+    }
+
     req.flash("success","Listing Updated");  
     res.redirect(`/listings/${id}`);
 };

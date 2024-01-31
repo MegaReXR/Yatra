@@ -9,6 +9,12 @@ const{isLoggedIn,isOwner,validateListing}= require("../middleware.js");
 // console.log(isLoggedIn);
 //REQUIRING ALL THE CALLABCK FUNCTION FORM CONTROLLER-> listing.js
 const listingController=require("../controller/listing.js");
+//USING MULETER TO ACCESS THE UPLOADED FILES
+const multer= require("multer");
+// const upload= multer({dest:"uploads/"});//initilize the local save folder for the uploaded files
+//USING CLODINARY STORAGE FOR SAVING FILES
+const {storage}=require("../cloudConfig.js");
+const upload= multer({storage});//initilize the local save folder for the uploaded files
 
 
 
@@ -33,7 +39,10 @@ const listingController=require("../controller/listing.js");
 //index route and create -> add to DB
 listingsRoute.route("/")
 .get(wrapAsync(listingController.showIndex))
-.post(isLoggedIn ,validateListing, wrapAsync(listingController.saveNewListing));
+.post(isLoggedIn ,upload.single("listing[image]"), validateListing, wrapAsync(listingController.saveNewListing)); //we have to update the valid listing also
+// .post(upload.single("listing[image]"),(req,res)=>{
+//     res.send(req.file);
+// });
 
 
 //create route
@@ -44,7 +53,7 @@ listingsRoute.get("/new",isLoggedIn,listingController.serveNewForm);
 //show route, update route and delete route
 listingsRoute.route("/:id")
 .get(wrapAsync(listingController.showListing))
-.put(isLoggedIn,isOwner,validateListing, wrapAsync(listingController.saveEditListing))
+.put(isLoggedIn,isOwner, upload.single("listing[image]"),validateListing, wrapAsync(listingController.saveEditListing))
 .delete(isLoggedIn,isOwner,wrapAsync(listingController.destroyListing));
 
 //edit route

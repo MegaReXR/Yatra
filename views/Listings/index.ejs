@@ -8,7 +8,7 @@
             <% for(listing of listings) {%>
                 <a href="/listings/<%=listing._id%>" class="listing_links">
                     <div class="card col listing-card">
-                        <img src="<%=listing.image%>" class="card-img-top" alt="listing image">
+                        <img src="<%=listing.image.url%>" class="card-img-top" alt="listing image">
                         <!-- card overlay to add clickable effect only on the pic not the whole div -->
                         <div class="card-img-overlay"></div>
                         <div class="card-body">

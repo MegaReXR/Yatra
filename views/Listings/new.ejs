@@ -6,7 +6,7 @@
         <!-- grid ka har er row ke liye custom column design -->
         <div class="row"> 
             <div class="col-8 offset-2">
-                <form method="post" action="/listings" novalidate class="needs-validation">
+                <form method="post" action="/listings" novalidate class="needs-validation" enctype="multipart/form-data">
                     <div class="mb-3">
                         <label for="title" class="form-label">Enter title</label>
                         <input type="text" name="listing[title]" id="title" placeholder="enter title"
@@ -18,7 +18,12 @@
                         <textarea name="listing[desc]" id="desc" cols="30" rows="10" placeholder="enter desc"
                             class="form-control" required></textarea>
                         <div class="invalid-feedback">Desc required</div>
-
+                    </div>
+                    <div class="mb-3">
+                        <label for="image" class="form-label">Uplaod image</label>
+                        <input type="file" name="listing[image]" id="image" placeholder="Uplaod image"
+                        class="form-control" required>
+                        <div class="invalid-feedback">image required</div>
                     </div>
                     <div class="row">
                         <!-- applies only on the defined size, below this occupy 12 cols total -->
