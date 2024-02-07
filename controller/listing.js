@@ -94,7 +94,12 @@ module.exports.serveEditForm= async(req,res)=>{
         req.flash("error","The listing doesn't exist");
         res.redirect("/listings");
     }
-    res.render("Listings/edit.ejs",{listing});
+
+    //COMPRESSING THE IMAGE FOR PREVIEWING USING CLOUDINARY API
+    let originalImageUrl= listing.image.url;
+    let compressedImageUrl= originalImageUrl.replace("/upload","/upload/w_300")
+    // console.log(compressedImageUrl);
+    res.render("Listings/edit.ejs",{listing,compressedImageUrl});
 };
 
 
