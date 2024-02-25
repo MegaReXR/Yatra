@@ -1,5 +1,8 @@
 <% layout("layouts/boilerplate") %>
-
+<script>
+    let mapToken= "<%=process.env.MAP_TOKEN%>";
+    //extracting env variable, to use the noremal variable in a rendered public js files
+</script>
     <body>
         <div class="row">
             <div class="col-8 offset-3">
@@ -54,7 +57,7 @@
                     </div>
                     <div>
                         <label for="comment" class="form-label">Comment:</label>
-                        <textarea name="review[comment]" class="form-control" id="" cols="30" rows="5" required></textarea>
+                        <textarea  name="review[comment]" class="form-control" id="comment" cols="30" rows="5" required placeholder="Type here"></textarea>
                         <div class="invalid-feedback">add a review to submit</div>
                     </div>
                     <div>
@@ -64,6 +67,9 @@
 
                 <hr>
                 <div class="row">
+                    <% if(listing.reviews.length > 0){ %>
+                    <h5>All Reviews</h5>
+                    <br><br>
                     <% for(review of listing.reviews) {%>
                         <div class="card col-5 mb-3 ms-3">
                             <div class="card-body">
@@ -75,7 +81,18 @@
                             </div>
                         </div>
                     <% } %>
-                    </div>
+                    <% } %>
+                </div>
+
+                <div>
+                    <h4>Where you will be: </h4>
+                    <br>
+                    <div id="map"></div>
+                    <br>
+                </div>
             </div>
         </div>
     </body>
+
+    <script src="/js/map.js"></script>
+    

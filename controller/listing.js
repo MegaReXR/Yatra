@@ -1,5 +1,12 @@
 const Listing=require("../models/listing.js");
-
+//using map while listing addition
+// import * as maptilersdk from '@maptiler/sdk';
+// const maptilersdk = require('@maptiler/sdk').catch((e)=>{
+//     console.log(e);
+// });
+// const maptilersdk = require('@maptiler/sdk/dist/index.js'); 
+let mapToken= process.env.MAP_TOKEN;
+// maptilersdk.config.apiKey = mapToken;
 
 module.exports.showIndex= async(req,res)=>{
     const listings=  await Listing.find();
@@ -14,6 +21,11 @@ module.exports.serveNewForm= (req,res)=>{ //before rendering the new form we hav
 
 
 module.exports.saveNewListing= async(req,res,next)=>{ //using wrap async for handling our errors AND if validateListing is passed then only out next middle ware fn is executed or err will be thrown to the next error handling middlewares
+
+    //using maptiler api for converting place to cordinates
+    const result = "afsdfsf";
+    console.log(result);
+
     if(!req.body.listing){ //to handle if any listing is not coming with req.body -> post req by hoppscotch with no body sent
         next(new ExpressError(400,"Please send a valid listing"));
     }

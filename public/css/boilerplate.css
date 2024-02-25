@@ -99,3 +99,11 @@ body{
 .dlt_btn{
     margin-left: 1rem;
 }
+
+
+/* MAP STYLING */
+#map{
+    /* position: absolute;  */
+    height: 400px;
+    width: 100vh;
+}
