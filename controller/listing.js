@@ -5,6 +5,7 @@ const Listing=require("../models/listing.js");
 //     console.log(e);
 // });
 // const maptilersdk = require('@maptiler/sdk/dist/index.js'); 
+const axios = require('axios');
 let mapToken= process.env.MAP_TOKEN;
 // maptilersdk.config.apiKey = mapToken;
 
@@ -23,8 +24,11 @@ module.exports.serveNewForm= (req,res)=>{ //before rendering the new form we hav
 module.exports.saveNewListing= async(req,res,next)=>{ //using wrap async for handling our errors AND if validateListing is passed then only out next middle ware fn is executed or err will be thrown to the next error handling middlewares
 
     //using maptiler api for converting place to cordinates
-    const result = "afsdfsf";
-    console.log(result);
+    let placeName=req.body.listing.location+", "+req.body.listing.country;
+    console.log(placeName);
+    const mapUrl = `https://api.maptiler.com/geocoding/${placeName}.json?key=r1NiBUKVV6TlRkAdmDM7`;
+    const response = await axios.get(mapUrl);
+    // console.log(response.data.features[0].geometry);
 
     if(!req.body.listing){ //to handle if any listing is not coming with req.body -> post req by hoppscotch with no body sent
         next(new ExpressError(400,"Please send a valid listing"));
@@ -70,8 +74,9 @@ module.exports.saveNewListing= async(req,res,next)=>{ //using wrap async for han
     let url=req.file.path; //req.file se image ka detaile nikalo
     let filename=req.file.filename;
     newListing.image={url,filename}; //save se phle inage field me woh fill krdo
-
-    await newListing.save() //isme error aane pe catch block me direct catch hoga
+    newListing.geometry=response.data.features[0].geometry;
+    let savedListing=await newListing.save() //isme error aane pe catch block me direct catch hoga
+    // console.log(savedListing);
     // .then((res)=>{
     //     console.log("data added");
     // })
