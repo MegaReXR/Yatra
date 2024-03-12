@@ -23,3 +23,20 @@ const marker = new maptilersdk.Marker({
     draggable: true
 }).setLngLat(coord)
     .addTo(map);
+
+const markerHeight = 50, markerRadius = 10, linearOffset = 25;
+const popupOffsets = {
+    'top': [0, 0],
+    'top-left': [0,0],
+    'top-right': [0,0],
+    'bottom': [0, -markerHeight],
+    'bottom-left': [linearOffset, (markerHeight - markerRadius + linearOffset) * -1],
+    'bottom-right': [-linearOffset, (markerHeight - markerRadius + linearOffset) * -1],
+    'left': [markerRadius, (markerHeight - markerRadius) * -1],
+    'right': [-markerRadius, (markerHeight - markerRadius) * -1]
+};
+const popup = new maptilersdk.Popup({offset: popupOffsets, className: 'my-class'})
+.setLngLat(coord)
+.setHTML(`<p>Here your can stay</p>`)
+.setMaxWidth("600px")
+.addTo(map);
