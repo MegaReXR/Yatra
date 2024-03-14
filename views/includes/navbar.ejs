@@ -1,3 +1,20 @@
+<style>
+    .search_box{
+        position: relative;
+        left:-4rem;
+    }
+    .search_btn{
+        display:flex;
+        border-radius:20px;
+    }
+    .search_form{
+        border-radius:20px;
+        text-align: center;
+    }
+    .search_icon{
+        margin-top:5px;
+    }
+</style>
 <nav class="navbar navbar-expand-md bg-body-tertiary sticky-top border-bottom">
     <div class="container-fluid">
         <a class="navbar-brand" href="/"><i class="fa-regular fa-compass"></i></a>
@@ -9,7 +26,15 @@
             <div class="navbar-nav">
                 <a class="nav-link" href="/">Home</a>
                 <a class="nav-link" href="/listings">Explore</a>
-                <a class="nav-link" href="/listings/new">Add New Listing</a>
+                <a class="nav-link" href="/listings/new">Add Place</a>
+            </div>
+            <div class="navbar-nav ms-auto">
+                <div class="container-fluid ms-auto search_box">
+                    <form class="d-flex" role="search">
+                      <input class="form-control me-2 search_form" type="search" placeholder="Search Destinations" aria-label="Search">
+                      <button class="btn btn-outline-danger search_btn" type="submit"><i class="fa-solid fa-magnifying-glass search_icon"></i>&nbspSearch </button>
+                    </form>
+                </div>
             </div>
             <div class="navbar-nav ms-auto">
                 <% if(!currUser) {%>
