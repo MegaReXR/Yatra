@@ -17,7 +17,7 @@ module.exports.showIndex= async(req,res)=>{
 
 
 module.exports.serveNewForm= (req,res)=>{ //before rendering the new form we have to check or user is logged in or authenticated for current session or not using req.user maintained by passport
-    res.render("listings/new.ejs");
+    res.render("Listings/new.ejs");
 };
 
 
