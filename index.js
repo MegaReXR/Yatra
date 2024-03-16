@@ -23,6 +23,8 @@ const listingRoute=require("./routes/listing.js");
 const reviewRoute=require("./routes/review.js");
 //USING EXPRESS SESSION
 const session=require("express-session");
+//USING MONGO SESSION STORE
+const MongoStore=require("connect-mongo");
 //USING FLASH 
 const flash=require("connect-flash");
 //USING PASSPORT
@@ -32,11 +34,26 @@ const User= require("./models/user.js");
 //USER ROUTE
 const userRoute=require("./routes/user.js");
 
+//online cloud db url
+let atlasURL=process.env.ATLAS_URL;
 
+//SETTING UP THE MONGO SESSION
+const store=MongoStore.create({
+    mongoUrl:atlasURL,
+    crypto:{
+        secret:process.env.SECRET,
+    },
+    touchAfter: 24 * 3600 // time period in seconds
+});
+//error handler for mongostore
+store.on("error",()=>{
+    console.log("Connect mongo error ",err);
+});
 
 // SETTING UP EXPRESS SESSION MIDDLEWARE
 const sessionOptions={
-    secret:"secretcode",
+    store:store,//for maintaing session options we use atlas
+    secret:process.env.SECRET,
     resave:false,
     saveUninitialized:true,
     //SETTING COOKIE OPTIONS FOR SESSION_ID cookie
@@ -46,7 +63,7 @@ const sessionOptions={
         httpOnly: true
     }
 };
-app.use(session(sessionOptions));
+app.use(session(sessionOptions));//using express sessions
 
 
 
@@ -62,8 +79,10 @@ app.engine("ejs",ejsMate);
 
 //connecting to our DB
 let mongoURL="mongodb://127.0.0.1:27017/wonderlust";
+// let atlasURL=process.env.ATLAS_URL; //also ussed previously to store session details
+
 async function main(){
-    await mongoose.connect(mongoURL);
+    await mongoose.connect(atlasURL);
 }
 main()
 .then((res)=>{
