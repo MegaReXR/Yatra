@@ -82,8 +82,8 @@ let mongoURL="mongodb://127.0.0.1:27017/wonderlust";
 // let atlasURL=process.env.ATLAS_URL; //also ussed previously to store session details
 
 async function main(){
-    // await mongoose.connect(atlasURL);
-    await mongoose.connect(mongoURL);
+    await mongoose.connect(atlasURL);
+    // await mongoose.connect(mongoURL);
 }
 main()
 .then((res)=>{
