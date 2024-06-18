@@ -35,6 +35,15 @@ userRoute.route("/login")
 userRoute.get("/logout",userController.logout);
 
 
+
+
+//EXTRA-root route control
+userRoute.route("/")
+    .get(userController.homeView)
+
+
+
+
 // //SIGN UP ROUTES
 // userRoute.get("/signup",userController.signupForm);
 
