@@ -1,6 +1,6 @@
 /* body of whole the enveloped code, basically body of boilerplate layout */
 body{ 
-    background-color: white !important;
+    background-color: #D3D3D2!important;
     font-family: 'League Spartan', sans-serif;
     font-family: 'Montserrat', sans-serif;
     font-family: 'Plus Jakarta Sans', sans-serif !important;
@@ -9,7 +9,18 @@ body{
     display: flex;
     flex-direction: column;
     min-height: 100vh;
+    min-width: 100vw;
 }
+.title {
+    text-align: center;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    color: #fff;
+    font-size: 50px;
+}
+
 .container{
     flex:1;
 }
@@ -19,7 +30,7 @@ body{
 }
 .fa-compass{
     font-size: 2em;
-    color: #fe424d;
+    color: #01796F;
 }
 .nav-link{
     color:#222222 !important;
@@ -53,9 +64,12 @@ body{
 }
 
 /* CARDS */
+.card{
+    padding-bottom: 1rem;
+}
 .card-img-top{
     height:18rem;
-    border-radius: 20px;
+    border-radius: 8px;
 }
 .listing-card{
     margin:15px auto;
@@ -73,7 +87,7 @@ body{
 }
 .card-body{
     margin: 0;
-    padding: 0 !important;
+    padding: 1rem !important;
 }
 .card-text p, .card-text{
     font-weight: 400;
@@ -88,7 +102,7 @@ body{
 /* EDIT PAGE */
 .edit_btn{
     border: none;
-    background-color: #fe424d;
+    background-color: #00A86B;
 }
 
 /* SHOW PAGE */

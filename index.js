@@ -34,10 +34,10 @@ const User= require("./models/user.js");
 //USER ROUTE
 const userRoute=require("./routes/user.js");
 
-//online cloud db url
+// //online cloud db url
 let atlasURL=process.env.ATLAS_URL;
 
-//SETTING UP THE MONGO SESSION
+// //SETTING UP THE MONGO SESSION
 const store=MongoStore.create({
     mongoUrl:atlasURL,
     crypto:{
@@ -54,6 +54,7 @@ store.on("error",()=>{
 const sessionOptions={
     store:store,//for maintaing session options we use atlas
     secret:process.env.SECRET,
+    // secret:"secretcode",
     resave:false,
     saveUninitialized:true,
     //SETTING COOKIE OPTIONS FOR SESSION_ID cookie

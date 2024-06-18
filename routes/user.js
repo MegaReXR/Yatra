@@ -9,6 +9,16 @@ const {saveRedirectUrl}=require("../middleware.js");
 const userController= require("../controller/user.js");
 
 
+
+
+//EXTRA HERE -> homepage should have its own rouye and file but for temporary reason swe set homepage to this user page
+userRoute.route("/home")
+    .get(userController.homeView)
+
+userRoute.route("/book")
+    .get(userController.bookView)
+
+
 //SIGN UP ROUTES 
 userRoute.route("/signup")
 .get(userController.signupForm)
