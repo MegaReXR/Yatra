@@ -23,8 +23,11 @@ const listingRoute=require("./routes/listing.js");
 const reviewRoute=require("./routes/review.js");
 //USING EXPRESS SESSION
 const session=require("express-session");
+
+// for online deplyment
 //USING MONGO SESSION STORE
 const MongoStore=require("connect-mongo");
+
 //USING FLASH 
 const flash=require("connect-flash");
 //USING PASSPORT
@@ -37,7 +40,7 @@ const userRoute=require("./routes/user.js");
 // //online cloud db url
 let atlasURL=process.env.ATLAS_URL;
 
-// //SETTING UP THE MONGO SESSION
+//SETTING UP THE MONGO SESSION
 const store=MongoStore.create({
     mongoUrl:atlasURL,
     crypto:{
