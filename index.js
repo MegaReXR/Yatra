@@ -124,7 +124,7 @@ app.use((req,res,next)=>{
     res.locals.succMsg=req.flash("success");//extracting flash message
     res.locals.errMsg=req.flash("error");//extracting flash message
     //should be defined after the passport defination -> as req.user is maintained by passport
-    res.locals.currUser=req.user;//to track curr user is logged in or not in curr session
+    res.locals.currUser=req.user || null;//to track curr user is logged in or not in curr session
     // console.log(res.locals.succMsg);
     // console.log(res.locals.errMsg);
     // console.log(res.locals.currUser);
