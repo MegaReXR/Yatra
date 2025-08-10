@@ -7,6 +7,7 @@ if(process.env.NODE_ENV!="production"){
 //requiring all the meeded modules
 const express=require("express");
 const app= express();
+const axios = require('axios');
 const mongoose=require("mongoose");
 const Listing=require("./models/listing.js");
 const path= require("path");
@@ -36,6 +37,24 @@ const LoaclStrategy=require("passport-local");
 const User= require("./models/user.js");
 //USER ROUTE
 const userRoute=require("./routes/user.js");
+
+
+//for smooth render deploy loading
+const url = `https://yatra-k765.onrender.com`;
+const interval = 30000;
+function reloadWebsite() {
+    axios
+        .get(url)
+        .then((response) => {
+        console.log("website reloded");
+        })
+        .catch((error) => {
+        console.error(`Error : ${error.message}`);
+        });
+}
+setInterval(reloadWebsite, interval);
+
+
 
 // //online cloud db url
 let atlasURL=process.env.ATLAS_URL;
